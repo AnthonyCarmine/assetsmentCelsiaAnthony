@@ -1,0 +1,136 @@
+@model List<assetsmentCelsia.Models.User>
+@* @model List<assetsmentCelsia.Models.Invoice>
+@model List<assetsmentCelsia.Models.Platform>
+@model List<assetsmentCelsia.Models.Transaction> *@
+
+
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4">Lista de Usuarios</h1>
+            <p>Learn about <a href="http://docs.microsoft.com/aspnet/core">building web app with ASP.NET Core</a>.</p>
+
+            <a class="btn btn-primary" asp-action="ExportarExcel">Descargar Excel de Usuarios</a>
+        </div>
+        <div>
+            <a class="btn btn-success mb-2" asp-controller="User" asp-action="Index">Acciones para usuarios</a>       
+        </div>
+
+        <form method="post" asp-action="ImportarExcel" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="archivo">Subir archivo Excel</label>
+                <input type="file" name="archivo" id="archivo" class="form-control-file"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+
+        <div class="mt-4">
+    <h2>Usuarios</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Documento</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Contraseña</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Names</td>
+                    <td>@user.Document</td>
+                    <td>@user.Address</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@* 
+<div class="mt-4">
+    <h2>Facturas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Número de Factura</th>
+                <th>Periodo de Facturación</th>
+                <th>Monto Facturado</th>
+                <th>Monto Pagado</th>
+                <th>Usuario ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var invoice in Model.Invoices)
+            {
+                <tr>
+                    <td>@invoice.InvoiceNumber</td>
+                    <td>@invoice.PeriodInvoicing</td>
+                    <td>@invoice.InvoicedAmount</td>
+                    <td>@invoice.AmountPaid</td>
+                    <td>@invoice.UserId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <h2>Plataformas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var platform in Model.Platforms)
+            {
+                <tr>
+                    <td>@platform.Id</td>
+                    <td>@platform.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <h2>Transacciones</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha y Hora</th>
+                <th>Monto</th>
+                <th>Estado</th>
+                <th>Tipo</th>
+                <th>Plataforma ID</th>
+                <th>Factura ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>@transaction.Id</td>
+                    <td>@transaction.DateTimeTransaction</td>
+                    <td>@transaction.Amount</td>
+                    <td>@transaction.State</td>
+                    <td>@transaction.Type</td>
+                    <td>@transaction.PlatformId</td>
+                    <td>@transaction.InvoiceId</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div> *@
+    </div>
+</body>
+</html>

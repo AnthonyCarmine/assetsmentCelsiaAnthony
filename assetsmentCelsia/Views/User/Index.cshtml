@@ -1,0 +1,64 @@
+@model List<assetsmentCelsia.Models.User>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="display-4">Lista de Usuarios</h1>
+            <p>Learn about <a href="http://docs.microsoft.com/aspnet/core">building web app with ASP.NET Core</a>.</p>
+
+            <a class="btn btn-primary" asp-action="ExportarExcel">Descargar Excel de Usuarios</a>
+        </div>
+
+        <form method="post" asp-action="ImportarExcel" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <label for="archivo">Subir archivo Excel</label>
+                <input type="file" name="archivo" id="archivo" class="form-control-file"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+
+        <div class="mt-4">
+            <h2>Usuarios</h2>
+            <a class="btn btn-success mb-2" asp-action="Create">Crear Nuevo Usuario</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Names</td>
+                            <td>@user.Document</td>
+                            <td>@user.Address</td>
+                            <td>@user.Phone</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <a class="btn btn-info" asp-action="Details" asp-route-id="@user.Id">Detalles</a>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@user.Id">Editar</a>
+                                <form asp-action="Delete" asp-route-id="@user.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
